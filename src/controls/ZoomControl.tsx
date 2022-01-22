@@ -29,7 +29,7 @@ const commonButtonStyle: React.CSSProperties = {
   outline: 'none',
 }
 
-export function ZoomControl({ style, buttonStyle, setCenterZoom, mapState, mapProps }: ZoomProps): JSX.Element {
+export function ZoomControl({ style, buttonStyle, setCenterZoom, toggleFullscreen, mapState, mapProps }: ZoomProps): JSX.Element {
   return (
     <div className="pigeon-zoom-buttons pigeon-drag-block" style={style ? { ...commonStyle, ...style } : commonStyle}>
       <button
@@ -45,6 +45,13 @@ export function ZoomControl({ style, buttonStyle, setCenterZoom, mapState, mapPr
         onClick={() => setCenterZoom(mapState.center, Math.max(mapState.zoom - 1, mapProps.minZoom))}
       >
         –
+      </button>
+      <button
+        className="pigeon-zoom-out"
+        style={buttonStyle ? { ...commonButtonStyle, ...buttonStyle } : commonButtonStyle}
+        onClick={toggleFullscreen}
+      >
+        {!mapState.isFullscreen ? "⛶": "🮻"}
       </button>
     </div>
   )
