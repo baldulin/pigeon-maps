@@ -123,11 +123,13 @@ export interface MapState {
   center: Point
   width: number
   height: number
+  isFullscreen: boolean
 }
 
 export interface PigeonProps {
   anchor?: Point
   offset?: Point
+  position?: Point
   left?: number
   top?: number
   mapState?: MapState
@@ -137,4 +139,5 @@ export interface PigeonProps {
   latLngToPixel?: (latLng: Point, center?: Point, zoom?: number) => Point
   pixelToLatLng?: (pixel: Point, center?: Point, zoom?: number) => Point
   setCenterZoom?: (center: Point | null, zoom: number, zoomAround?: Point | null, animationDuration?: number) => void
+  attachOverlayChild?: (child: any, mapState?: MapState) => any
 }
