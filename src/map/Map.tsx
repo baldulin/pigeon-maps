@@ -1274,7 +1274,7 @@ export class Map extends Component<MapProps, MapReactState> {
       }
 
       if(!mapState){
-            const { width, height, center} = this.state
+            const { width, height, center, isFullscreen } = this.state
 
             mapState = {
               bounds: this.getBounds(),
@@ -1282,6 +1282,7 @@ export class Map extends Component<MapProps, MapReactState> {
               center,
               width,
               height,
+              isFullscreen,
             }
       }
 
@@ -1296,13 +1297,14 @@ export class Map extends Component<MapProps, MapReactState> {
         pixelToLatLng: this.pixelToLatLng,
         setCenterZoom: this.setCenterZoomForChildren,
         attachOverlayChild: this.attachOverlayChild,
+        toggleFullscreen: this.toggleFullscreen,
         mapProps: this.props,
         mapState,
       } as PigeonProps)
   }
 
   renderOverlays(): JSX.Element {
-    const { width, height, center } = this.state
+    const { width, height, center, isFullscreen } = this.state
 
     const mapState = {
       bounds: this.getBounds(),
@@ -1310,6 +1312,7 @@ export class Map extends Component<MapProps, MapReactState> {
       center: center,
       width,
       height,
+      isFullscreen,
     }
 
     const childrenWithProps = React.Children.map(this.props.children, (child) => this.attachOverlayChild(child, mapState))

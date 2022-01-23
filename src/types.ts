@@ -141,5 +141,5 @@ export interface PigeonProps {
   pixelToLatLng?: (pixel: Point, center?: Point, zoom?: number) => Point
   setCenterZoom?: (center: Point | null, zoom: number, zoomAround?: Point | null, animationDuration?: number) => void
   attachOverlayChild?: (child: any, mapState?: MapState) => any
-  toggleFullscreen?: () => void,
+  toggleFullscreen?: () => void
 }
