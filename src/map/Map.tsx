@@ -112,6 +112,7 @@ export class Map extends Component<MapProps, MapReactState> {
     maxZoom: 18,
     limitBounds: 'center',
     dprs: [],
+    isFullscreen: false,
   }
 
   _containerRef?: HTMLDivElement
@@ -184,6 +185,7 @@ export class Map extends Component<MapProps, MapReactState> {
     }
 
     this.bindWheelEvent()
+    this.bindFullscreenEvent()
     this.syncToProps()
 
     if (typeof (window as any).ResizeObserver !== 'undefined') {
@@ -200,6 +202,7 @@ export class Map extends Component<MapProps, MapReactState> {
     this.props.touchEvents && this.unbindTouchEvents()
 
     this.unbindWheelEvent()
+    this.unbindFullscreenEvent()
 
     if (!this.props.width || !this.props.height) {
       this.unbindResizeEvent()
@@ -270,6 +273,14 @@ export class Map extends Component<MapProps, MapReactState> {
     if (this._containerRef) {
       this._containerRef.removeEventListener('wheel', this.handleWheel)
     }
+  }
+
+  bindFullscreenEvent = (): void => {
+    document.addEventListener('fullscreenchange', this.handleFullscreen)
+  }
+
+  unbindFullscreenEvent = (): void => {
+    document.removeEventListener('fullscreenchange', this.handleFullscreen);
   }
 
   componentDidUpdate(prevProps: MapProps): void {
@@ -924,6 +935,14 @@ export class Map extends Component<MapProps, MapReactState> {
     }
   }
 
+  handleFullscreen = (event: Event): void => {
+      if (document.fullscreenElement === this._containerRef) {
+        this.setState({isFullscreen: true});
+      } else {
+        this.setState({isFullscreen: false});
+      }
+  }
+
   handleWheel = (event: WheelEvent): void => {
     const { mouseEvents, metaWheelZoom, zoomSnap, animate } = this.props
 
@@ -1046,6 +1065,17 @@ export class Map extends Component<MapProps, MapReactState> {
     )
 
     return this.limitCenterAtZoom(newCenter, newZoom)
+  }
+
+  toggleFullscreen = () => {
+    if(this._containerRef){
+        if(this.state.isFullscreen){
+            document.exitFullscreen();
+        }
+        else{
+            this._containerRef.requestFullscreen();
+        }
+    }
   }
 
   // ref
