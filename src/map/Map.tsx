@@ -936,8 +936,10 @@ export class Map extends Component<MapProps, MapReactState> {
   handleFullscreen = (event: Event): void => {
       if (document.fullscreenElement === this._containerRef) {
         this.setState({isFullscreen: true});
+        this.updateWidthHeight();
       } else {
         this.setState({isFullscreen: false});
+        this.updateWidthHeight();
       }
   }
 
