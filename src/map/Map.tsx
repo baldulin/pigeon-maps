@@ -1292,6 +1292,7 @@ export class Map extends Component<MapProps, MapReactState> {
         latLngToPixel: this.latLngToPixel,
         pixelToLatLng: this.pixelToLatLng,
         setCenterZoom: this.setCenterZoomForChildren,
+        toggleFullscreen: this.toggleFullscreen,
         mapProps: this.props,
         mapState,
       })
