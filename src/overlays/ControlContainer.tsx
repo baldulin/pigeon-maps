@@ -4,6 +4,7 @@ import { PigeonProps } from '../types'
 interface ControlContainerProps extends PigeonProps {
   className?: string
   children?: React.ReactNode
+  style?: React.CSSProperties
 }
 
 export function ControlContainer(props: ControlContainerProps) {
@@ -24,6 +25,8 @@ export function ControlContainer(props: ControlContainerProps) {
     <div
       style={{
         position: 'absolute',
+        zIndex: 2,
+        ...props.style,
       }}
       className={props.className ? `${props.className} pigeon-click-block` : 'pigeon-click-block'}
     >
