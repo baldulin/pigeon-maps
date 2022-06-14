@@ -28,7 +28,7 @@ export function ControlContainer(props: ControlContainerProps) {
         zIndex: 2,
         ...props.style,
       }}
-      className={props.className ? `${props.className} pigeon-click-block` : 'pigeon-click-block'}
+      className={props.className ? `${props.className} pigeon-control-container` : 'pigeon-control-container'}
     >
       {React.Children.map(props.children, (child: JSX.Element): JSX.Element => {
         return React.cloneElement(child, childProps)
