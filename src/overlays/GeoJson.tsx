@@ -1,5 +1,6 @@
 import React, { CSSProperties, SVGProps, useMemo, useEffect, useState } from 'react'
 import { PigeonProps, Point } from '../types'
+import { getMousePixel } from '../map/Map'
 
 interface GeoJsonProps extends PigeonProps {
   className?: string
@@ -163,7 +164,7 @@ export function GeoJsonFeature(props: GeoJsonProps): JSX.Element {
 
   const eventParameters = (event: React.MouseEvent<SVGElement>) => ({
     event,
-    anchor: props.anchor,
+    anchor: props.anchor || props.pixelToLatLng(getMousePixel(props.mapContainer, event)),
     payload: props.feature,
   })
 
