@@ -128,7 +128,7 @@ export function FullscreenControl(props: FullscreenProps): JSX.Element {
   useEffect(() => {
     if (_isFullscreen !== isFullscreen) {
       if (!isFullscreen) {
-        document.exitFullscreen()
+        document.exitFullscreen && document.exitFullscreen()
       } else {
         const fullscreenContainer = container || mapContainer
         fullscreenContainer
